@@ -38,6 +38,7 @@ public class RMIClient {
 
 		try {
 			iRMIServer = (RMIServerI) Naming.lookup(urlServer);
+			isServerActive = true;
 		} catch (NotBoundException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
