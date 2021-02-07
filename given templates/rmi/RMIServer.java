@@ -17,8 +17,8 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	private int totalMessages = -1;
 	private int[] receivedMessages;
-	private static int port = 80;
-	private static String hostname = "0.0.0.0";
+	private static int port = 1099;
+	private static String hostname = "146.169.53.185";
 
 	public RMIServer() throws RemoteException {
 	}
@@ -72,11 +72,11 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		}
 
 		// Bind to RMI registry
-		String urlServer = new String("rmi://" + hostname + ":" + port + "/RMIServer");
-		rebindServer(port, rmis);
+		String urlServer = new String("rmi://146.169.53.185:1099/RMIServer");
+		rebindServer(urlServer, rmis);
 	}
 
-	protected static void rebindServer(int serverURL, RMIServer server) {
+	protected static void rebindServer(String serverURL, RMIServer server) {
 
 		// TO-DO:
 		// Start / find the registry (hint use LocateRegistry.createRegistry(...)
@@ -90,19 +90,18 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		boolean registryCreated = false;
 
 		try {
-			LocateRegistry.createRegistry(port);
+		    LocateRegistry.createRegistry(port);
 			System.out.println("Successfully created registry");
-		} catch (Exception e) {
 			registryCreated = true;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
 			if (registryCreated) {
 				System.out.println("Finding registry");
-				LocateRegistry.getRegistry(port);
-
-				Naming.rebind("RMIServer", server);
+				//LocateRegistry.getRegistry(port);
+				Naming.rebind(serverURL, server);
 				System.out.println("Successfully rebinded registry");
 			}
 		} catch (RemoteException e) {
