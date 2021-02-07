@@ -72,17 +72,15 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		}
 
 		// Bind to RMI registry
-		String urlServer = new String("rmi://146.169.53.185:1099/RMIServer");
+		String urlServer = new String("rmi://" + hostname + ":" + port + "/RMIServer");
 		rebindServer(urlServer, rmis);
 	}
 
 	protected static void rebindServer(String serverURL, RMIServer server) {
 
-		// TO-DO:
 		// Start / find the registry (hint use LocateRegistry.createRegistry(...)
 		// If we *know* the registry is running we could skip this (eg run rmiregistry in the start script)
 
-		// TO-DO:
 		// Now rebind the server to the registry (rebind replaces any existing servers bound to the serverURL)
 		// Note - Registry.rebind (as returned by createRegistry / getRegistry) does something similar but
 		// expects different things from the URL field.
@@ -90,7 +88,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		boolean registryCreated = false;
 
 		try {
-		    LocateRegistry.createRegistry(port);
+		    	LocateRegistry.createRegistry(port);
 			System.out.println("Successfully created registry");
 			registryCreated = true;
 		} catch (Exception e) {
@@ -100,7 +98,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		try {
 			if (registryCreated) {
 				System.out.println("Finding registry");
-				//LocateRegistry.getRegistry(port);
 				Naming.rebind(serverURL, server);
 				System.out.println("Successfully rebinded registry");
 			}
