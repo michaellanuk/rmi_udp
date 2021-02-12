@@ -6,6 +6,8 @@ A simple client passes a specified number of messages to a server. Each message 
 
 ## Usage
 
+Install dependencies with `./install.sh` to be able to build
+
 Compile with just `make` to compile both RMI and UDP clients/servers.
 
 ### To specify RMI:
