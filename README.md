@@ -12,10 +12,8 @@ Compile with just `make` to compile both RMI and UDP clients/servers.
 
 ### To specify RMI:
 
-Compile using `make rmi` and run with `./rmiclient.sh` on client machine and `./rmiserver.sh` on server machine.
+Compile using `make rmi` and run with `./rmiclient.sh <hostname:portnumber> <numberofmessages>` on client machine and `./rmiserver.sh` on server machine.
 
 ### To specify UDP:
 
-Compile using `make udp` and run with `./udpclient.sh` on client machine and `./udpserver.sh` on server machine.
-
-Run client executables with target hostname as first argument and number of messages to be sent as second argument.
+Compile using `make udp` and run with `./udpclient.sh <hostname> <portnumber> <numberofmessages>` on client machine and `./udpserver.sh` on server machine.
